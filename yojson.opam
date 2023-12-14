@@ -16,8 +16,9 @@ homepage: "https://github.com/ocaml-community/yojson"
 doc: "https://ocaml-community.github.io/yojson"
 bug-reports: "https://github.com/ocaml-community/yojson/issues"
 depends: [
-  "dune" {>= "2.7"}
-  "ocaml" {>= "4.02.3"}
+  "dune" {>= "3.8"}
+  "ocaml" {>= "5.1.0"}
+  "melange" {>= "2.0.0"}
   "cppo" {build}
   "alcotest" {with-test & >= "0.8.5"}
   "seq" {>= "0.2.2"}

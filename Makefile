@@ -1,6 +1,10 @@
+project_name = yojson
+
+DUNE = opam exec -- dune
+
 .PHONY: all
 all:
-	@dune build @install @examples
+	@dune build @install
 
 .PHONY: run-examples
 run-examples:
@@ -9,6 +13,27 @@ run-examples:
 .PHONY: install
 install:
 	@dune install
+
+.PHONY: mel-install
+mel-install: ## Install development dependencies
+	$(DUNE) build $(project_name).opam
+	opam update # make sure that opam has the latest information about published libraries in the opam repository https://opam.ocaml.org/packages/
+	opam install -y . --deps-only --with-test # install the Melange and OCaml dependencies
+
+.PHONY: create-switch
+create-switch:
+	opam switch create . -y --deps-only
+
+.PHONY: init
+init: create-switch mel-install
+
+.PHONY: build
+build:
+	$(DUNE) build
+
+.PHONY: watch
+watch:
+	$(DUNE) build --watch
 
 .PHONY: uninstall
 uninstall:
